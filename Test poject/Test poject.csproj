@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Test_poject</RootNamespace>
+	<Nullable>enable</Nullable>
+
+	  <StartupObject>Test_poject.Test</StartupObject>
+
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="EnumFalgs.cs" />
+    <Compile Remove="Extensions1.cs" />
+    <Compile Remove="Indesator+log.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="EnumFalgs.cs" />
+    <None Include="Extensions1.cs" />
+    <None Include="Indesator+log.cs" />
+  </ItemGroup>
+
+</Project>
