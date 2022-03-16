@@ -10,7 +10,7 @@ using FunctionsFV;
 
 namespace Test_poject
 {
-    internal class Test
+    internal class Inheritance
     {
        
         internal static Dictionary<string, BaseFunc> MyFunctionList = new Dictionary<string, BaseFunc>()
@@ -29,45 +29,18 @@ namespace Test_poject
             (string? Result, BaseFunc.BadResonTaskM enumM, Exception? ex) = await BaseFunc.taskM();
 
 
-            //if (enumM.HasFlag(BaseFunc.BadResonTaskM.Ok))
-            //{
-            //    Console.WriteLine("IS OK");
-            //}
-            //else
-            //{
-            //    if (enumM.HasFlag(BaseFunc.BadResonTaskM.Throw)) { Console.WriteLine($"{ex.Message}"); return; }
+            if (enumM.HasFlag(BaseFunc.BadResonTaskM.Ok))
+            {
+                Console.WriteLine("IS OK");
+            }
+            else
+            {
+                if (enumM.HasFlag(BaseFunc.BadResonTaskM.Throw)) { Console.WriteLine($"{ex.Message}"); return; }
 
-            //    Console.WriteLine(Enum.Format(typeof(BaseFunc.BadResonTaskM), enumM, "G"));
+                Console.WriteLine(Enum.Format(typeof(BaseFunc.BadResonTaskM), enumM, "G"));
 
-            //}
-
-
-
-
-            // var cbvb = await BaseFunc.taskM().GetT();
-
-            Task<(string? Result, BaseFunc.BadResonTaskM enumM, Exception? ex)>? ccasd = BaseFunc.taskM();
-
-            Console.WriteLine(GetRandom());
-            Console.WriteLine(GetRandom());
-            Console.WriteLine(GetRandom());
-
-            //    (string car, BaseFunc.BadResonTaskM mm) cccas = await sta.GetT<Task<(string, BaseFunc.BadResonTaskM, Exception?)>, BaseFunc.BadResonTaskM>(new object(), BaseFunc.taskM());
-        }
-
-        //Этот метод должен возвращать случайное значение
-        static int GetRandom()
-        {
-            //Создание объекта для генерации чисел (с указанием начального значения)
-            Random rnd = new Random();
-
-            //Получить случайное число 
-            int value = rnd.Next(1,6);
-
-            //Вернуть полученное значение
-            return value;
-        }
-
+            }        
+        }           
     }
 
     internal static class sta

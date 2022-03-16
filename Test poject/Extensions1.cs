@@ -15,23 +15,13 @@ namespace Test_poject
 
             (int ID, object MessageCollection, string Name) = test.Deconstruct();
 
-
-
-
-
-
             //dynamic test
             object log = test;
 
             dynamic logDynamic = log;
 
             (int id, object col, string name) = (logDynamic.id, logDynamic.messageCollection, logDynamic.name);
-            
-
-           
-
-
-
+                    
         }
 
     }
