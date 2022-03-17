@@ -6,7 +6,7 @@
     <RootNamespace>Test_poject</RootNamespace>
 	<Nullable>enable</Nullable>
 
-	  <StartupObject>Test_poject.Chance</StartupObject>
+	  <StartupObject>Test_poject.Cath</StartupObject>
 
 
   </PropertyGroup>
