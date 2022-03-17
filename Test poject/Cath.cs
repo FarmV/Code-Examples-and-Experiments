@@ -17,15 +17,19 @@ namespace Test_poject
             {
                 await ABS.Vs("1", 1);
             }
-            catch (Exception ex)
+            catch(ExReport ex)
             {
                 if (ex.Data.Count is 0 || ex.Data.Count > 1) throw;
-                if (await ExptHelper(ABS.VsFail.isNullargument, ex)) Console.WriteLine("Ок");
+                if (await ExptHelper(ABS.VsFail.Input_Argument_Main_is_Null, ex)) Console.WriteLine("Ок");
                 else
                 {
                     Console.WriteLine("Not Ok");
                     return;
                 }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -39,32 +43,51 @@ namespace Test_poject
         }
         internal static class ABS
         {
-            internal static Task<Exception> Exept(DictionaryEntry entry)
-            {
-                Exception res = new Exception();
-                res.Data[entry.Key] = entry.Value;
-                return Task.FromResult(res);
-            }
+            //internal static Task<Exception> Exept(DictionaryEntry entry)
+            //{
+            //    Exception res = new Exception();
+            //    res.Data[entry.Key] = entry.Value;
+            //    return Task.FromResult(res);
+            //}
             internal enum VsFail
             {
-                isNullargument = 1, fols2 = 2, fols3 = 3, fols4 = 4, fols5 = 5,
+                Input_Argument_Main_is_Null = 1, 
+                Input_Argument_Pars_is_Out_Of_Range = 2, 
+                Invalid_Operation_2 = 3, 
+                Invalid_Operation_3 = 4, 
+                Invalid_Operation_4 = 5,
             }
 
             internal static async Task<string> Vs(string main, int pars)
             {
                 DictionaryEntry[] vsFail = new DictionaryEntry[]
                 {
-                    new DictionaryEntry(VsFail.isNullargument,"не хочу"),        //0
-                    new DictionaryEntry(VsFail.fols2,"не буду"),                 //1
-                    new DictionaryEntry(VsFail.fols3,"не могу"),                 //2
-                    new DictionaryEntry(VsFail.fols4,"отстань"),                 //3
-                    new DictionaryEntry(VsFail.fols5,"Могу, но надо подумать!"), //4
+                    new DictionaryEntry(VsFail.Input_Argument_Main_is_Null,"не хочу"),         //0
+                    new DictionaryEntry(VsFail.Input_Argument_Pars_is_Out_Of_Range,"не буду"), //1
+                    new DictionaryEntry(VsFail.Invalid_Operation_2,"не могу"),                 //2
+                    new DictionaryEntry(VsFail.Invalid_Operation_3,"отстань"),                 //3
+                    new DictionaryEntry(VsFail.Invalid_Operation_4,"Могу, но надо подумать!"), //4
                 };
 
-                throw await Exept(vsFail[3]);
-
+                throw new ExReport(vsFail[0]);
+                throw new Exception().MyRport(vsFail[0]);
                 return "OK";
             }
+        }
+    }
+    internal static class ExS
+    {
+        internal static Exception MyRport(this Exception ex, DictionaryEntry report)
+        {
+            ex.Data[report.Key] = report.Value;
+            return ex;
+        }
+    }
+    internal class ExReport: Exception
+    {     
+        public ExReport(DictionaryEntry report)
+        {
+            base.Data[report.Key] = report.Value;
         }
     }
 }
