@@ -11,10 +11,7 @@ namespace Test_poject
     {
         static async Task Main()
         {
-
-
-
-            int aasd = default;
+            int testCount = default;
 
             AddF<Task>("Еденица", new Task(async () =>
             {
@@ -31,7 +28,7 @@ namespace Test_poject
                 
                     var res = TestType.D(res1);
                 
-                    aasd = res;
+                    testCount = res;
                 
                     return res;
                 
@@ -51,7 +48,7 @@ namespace Test_poject
 
             Call<Task<int>>("Test1"); // Если при вызове указывать тип не соотвествубщий сигнатуре например Call<Task> вместо Call<Task<int>> то будет исключние
 
-            // У удного и того же статического класса параметризированного T. Будет свой отдельный статический класс. Он создаеётся в момент помещеёния новго типа? 
+            // У удного и того же статического класса параметризированного T. Полея и методоы с типом T будут созданы при первом вызове. 
             while (true)
             {
                 //await Task.Delay(200);
@@ -63,6 +60,8 @@ namespace Test_poject
         {
             internal static Dictionary<string, T> FunctionsCallback = new Dictionary<string, T>();
 
+            internal static long[] testDate = new long[] { DateTime.Now.Ticks };
+            internal static (Type, long)[] testDate2 = new (Type, long)[] { (typeof(T), DateTime.Now.Ticks) };
             internal static string[] TestStr = new string[]
             {
                 $"{typeof(T)}"
@@ -76,6 +75,9 @@ namespace Test_poject
         internal static void Call<T>(string key) where T : Task
         {
             Debug.WriteLine($"{F<Task>.TestStr[0]}");
+            Debug.WriteLine($"{F<Task>.testDate2[0].Item2}");
+            Debug.WriteLine($"{F<Task>.FunctionsCallback.Count}");
+            Debug.WriteLine($"{F<Task>.testDate[0]}");
             Debug.WriteLine($"{F<Task<int>>.TestStr[0]}");
             Debug.WriteLine($"{F<Task<long>>.TestStr[0]}");
 
