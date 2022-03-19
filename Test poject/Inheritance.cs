@@ -22,8 +22,7 @@ namespace Test_poject
         {
             if (MyFunctionList["Кот"] is not A1 res) throw new NullReferenceException();
 
-            Enum? a = res.getE();
-            var cc = Enum.Format(typeof(A1.Reason), a, "G");
+         
 
 
             (string? Result, BaseFunc.BadResonTaskM enumM, Exception? ex) = await BaseFunc.taskM();

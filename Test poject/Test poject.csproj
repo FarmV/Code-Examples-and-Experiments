@@ -6,22 +6,30 @@
     <RootNamespace>Test_poject</RootNamespace>
 	<Nullable>enable</Nullable>
 
-	  <StartupObject>Test_poject.Cath</StartupObject>
+	  <StartupObject>Test_poject.UnivarsalType</StartupObject>
 
 
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Cancel.cs" />
+    <Compile Remove="Cath.cs" />
+    <Compile Remove="Chance .cs" />
     <Compile Remove="EnumFalgs.cs" />
     <Compile Remove="Extensions1.cs" />
     <Compile Remove="Indesator+log.cs" />
+    <Compile Remove="Inheritance.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="Cancel.cs" />
+    <None Include="Cath.cs" />
+    <None Include="Chance .cs" />
     <None Include="EnumFalgs.cs" />
     <None Include="Extensions1.cs" />
     <None Include="Indesator+log.cs" />
+    <None Include="Inheritance.cs" />
   </ItemGroup>
 
 </Project>
