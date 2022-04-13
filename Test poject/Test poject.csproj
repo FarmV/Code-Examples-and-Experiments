@@ -6,7 +6,7 @@
     <RootNamespace>Test_poject</RootNamespace>
 	<Nullable>enable</Nullable>
 
-	  <StartupObject>Test_poject.BitOperations</StartupObject>
+	  <StartupObject>Test_poject.Hook_Keyboards</StartupObject>
 
 	  <UseWindowsForms>True</UseWindowsForms>
 
@@ -20,7 +20,6 @@
     <Compile Remove="Chance .cs" />
     <Compile Remove="EnumFalgs.cs" />
     <Compile Remove="Extensions1.cs" />
-    <Compile Remove="Hook Keyboards.cs" />
     <Compile Remove="Indesator+log.cs" />
     <Compile Remove="Inheritance.cs" />
     <Compile Remove="MyTestThread.cs" />
@@ -35,7 +34,6 @@
     <None Include="Chance .cs" />
     <None Include="EnumFalgs.cs" />
     <None Include="Extensions1.cs" />
-    <None Include="Hook Keyboards.cs" />
     <None Include="Indesator+log.cs" />
     <None Include="Inheritance.cs" />
     <None Include="MyTestThread.cs" />

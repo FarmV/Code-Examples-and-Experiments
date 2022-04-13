@@ -561,7 +561,7 @@ namespace Test_poject
 
         public async ValueTask DisposeAsync() => await Task.Run(() => { UninstallHook(); GC.SuppressFinalize(this); });
 
-        private delegate IntPtr KeyboardHookHandler(int nCode, int wParam, int lParam);
+        private delegate IntPtr KeyboardHookHandler(int nCode, WMEvent wParam, TagKBDLLHOOKSTRUCT lParam);
         private KeyboardHookHandler? hookHandler;
 
         private IntPtr hookID = IntPtr.Zero;
@@ -580,7 +580,7 @@ namespace Test_poject
         private readonly int WH_KEYBOARD_LL = 13;
         private readonly int WH_KEYBOARD = 2;
 
-        private IntPtr SetHook(KeyboardHookHandler proc) => SetWindowsHookEx(WH_KEYBOARD, proc,
+        private IntPtr SetHook(KeyboardHookHandler proc) => SetWindowsHookEx(WH_KEYBOARD_LL, proc,
                  GetModuleHandleW(Process.GetCurrentProcess().MainModule is not ProcessModule module2 ? throw new NullReferenceException() : module2.ModuleName ?? throw new NullReferenceException()), 0);
 
 
@@ -590,18 +590,17 @@ namespace Test_poject
 
 
         private List<(WMEvent,int)> test = new List<(WMEvent, int)>();
-        private IntPtr HookFunc(int nCode, int wParam, int lParam)
+        private IntPtr HookFunc(int nCode, WMEvent wParam, TagKBDLLHOOKSTRUCT lParam)
         {
 
             //   test.Add((wParam, lParam.Flags));
 
 
-            //Console.WriteLine($"Эвент_{wParam}_ - клавиша _{lParam.Vkcode}_ - ScanCode _{lParam.ScanCode}_ Time _{lParam.Time}_{Environment.NewLine}" +
-            //$"Альт нажата? - {( (KeyStats)lParam.Flags ).ALTkeyIsPpressed}, Клавиша расширенная? - {( (KeyStats)lParam.Flags ).Extendedkey}, " +
-            //$"Cобытие инжектировано из низкого уровня? - {( (KeyStats)lParam.Flags ).EventjectedisLow}, Cобытие инжектировано? - {( (KeyStats)lParam.Flags ).EventIsInjected}, Отпущена ли клавиша? - {( (KeyStats)lParam.Flags ).KeyNotIsPressed} {Environment.NewLine} ");
-            //$"Повтор {( (KeyStats)lParam.Flags ).CountRepeat} ");
+            Console.WriteLine($"Эвент_{wParam}_ - клавиша _{lParam.Vkcode}_ - ScanCode _{lParam.ScanCode}_ Time _{lParam.Time}_{Environment.NewLine}" +
+            $"Альт нажата? - {( (KeyStats)lParam.Flags ).ALTkeyIsPpressed}, Клавиша расширенная? - {( (KeyStats)lParam.Flags ).Extendedkey}, " +
+            $"Cобытие инжектировано из низкого уровня? - {( (KeyStats)lParam.Flags ).EventjectedisLow}, Cобытие инжектировано? - {( (KeyStats)lParam.Flags ).EventIsInjected}, Отпущена ли клавиша? - {( (KeyStats)lParam.Flags ).KeyNotIsPressed} {Environment.NewLine} ");
+ 
 
-            Console.WriteLine($"{(ViryalKey)wParam}, {lParam}");
             if (nCode >= 0)
             {
                 //if (wParam is WM_KEYDOWN || wParam is WM_SYSKEYDOWN)
@@ -665,7 +664,7 @@ namespace Test_poject
         private static extern bool UnhookWindowsHookEx(IntPtr hhk);
 
         [DllImport("user32.dll")]
-        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, int wParam, int lParam);
+        private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, int wParam, TagKBDLLHOOKSTRUCT lParam);
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
         private static extern IntPtr GetModuleHandleW([MarshalAs(UnmanagedType.LPWStr)] string lpModuleName);
